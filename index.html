@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)https://www.hellopro.fr/ -->
+<html lang="fr" class="">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="verify-v1" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, minimum-scale=1.0">
+    <link rel="canonical">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./index_files/css2" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Roboto Flex", sans-serif;
+        }
+
+        #main-container {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: all ease-out .2s;
+        }
+
+        header {
+            display: flex;
+            height: 80px;
+            background-color: #DB5600;
+            color: #FFF;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, .07);
+            padding: 18px;
+            box-sizing: border-box;
+        }
+        header .header-bloc{
+            display: flex;
+            height: 100%;
+            box-sizing: border-box;
+            justify-content: flex-start;
+            gap: 22px;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        #main {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #FFF;
+        }
+
+        #main>div {
+            height: 100%;
+        }
+        nav{
+            cursor: pointer;
+        }
+        #App{
+            display: flex;
+            flex-direction: row;
+            height: 100dvh;
+        }
+        #sidebar {
+            background-color: #232323;
+            width: 250px;
+            color: white;
+        }
+        #App.sidebar-open #main-container {
+            left: 250px;
+        }
+        #sidebar header {
+            background-color: #232323;
+        }
+        .d-none{
+            display: none;
+        }
+
+        .opacity-0{
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="App">
+        <section id="sidebar">
+            <header>
+                <div class="header-bloc opacity-0">
+                    <nav data-action-sidebar="close"><i class="bx bx-menu bx-md"></i></nav>
+                    <div class="logo">FindEat</div>
+                </div>
+            </header>
+        </section>
+        <section id="main-container">
+            <header>
+                <div class="header-bloc">
+                    <nav data-action-sidebar="open"><i class="bx bx-menu bx-md"></i></nav>
+                    <div class="logo">FindEat</div>
+                </div>
+            </header>
+            <section id="main">
+                <div>
+                    <div>
+                        <h1>h1 du site</h1>
+                    </div>
+                    <div><input type="text"></div>
+                </div>
+            </section>
+        </section>
+    </div>
+    <script>
+        document.querySelectorAll("[data-action-sidebar]").forEach((e)=>{
+            e.addEventListener("click", function(e){
+                var open = this.getAttribute("data-action-sidebar") == "open";
+                if(open){
+                    document.querySelector("#App").classList.add("sidebar-open");
+                    document.querySelector("#main-container .header-bloc").classList.add("opacity-0");
+                    document.querySelector("#sidebar .header-bloc").classList.remove("opacity-0");           
+                }
+                else{
+                    document.querySelector("#App").classList.remove("sidebar-open");
+                    document.querySelector("#main-container .header-bloc").classList.remove("opacity-0");
+                    document.querySelector("#sidebar .header-bloc").classList.add("opacity-0");
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
