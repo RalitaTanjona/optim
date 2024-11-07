@@ -134,11 +134,21 @@
             background-color: #ffe1ce;
             border-radius: 6px;
             padding: 10px 28px;
+            position: relative;
         }
         .bx.bx-search-alt {
             font-size: 28px;
             color: #DB5600;
             cursor: pointer;
+        }
+        #custom-placeholder {
+            position: absolute;
+            left: 28px;
+            font-size: 20px;
+            color: grey;
+        }
+        #input-search:focus + #custom-placeholder {
+            opacity: 0;
         }
     </style>
 </head>
@@ -164,10 +174,12 @@
             <section id="main">
                 <div id="main-bloc">
                     <div style="position: relative;top: -50px;">
-                        <h1>Rechercher un restaurant n'a jamais été aussi simple. <span>Commencez votre recherche maintenant !</span></h1>
+                        <h1>Envie d'un plat particulier ?<span>Commencez votre recherche ici !</span></h1>
                     </div>
                     <div class="search-container">
-                        <input type="search" id="input-search"><i class="bx bx-search-alt"></i>
+                        <input type="text" id="input-search">
+                        <span id="custom-placeholder">Un plat sucré, salé, acide ou umami ?</span>
+                        <i class="bx bx-search-alt"></i>
                     </div>
                 </div>
             </section>
@@ -189,6 +201,38 @@
                 }
             })
         })
+        document.getElementById("custom-placeholder").addEventListener("click", function(e){
+            document.getElementById("input-search").focus()
+        })
+        // Tableau de suggestions de placeholders
+        const placeholders = [
+        "Un plat à base de...",
+        "Envie d'un plat avec...",
+        "Quel ingrédient principal vous tente ?",
+        "Un plat sans...",
+        "Un plat sucré, salé, acide ou umami ?",
+        "Envie d'un plat épicé ou doux ?",
+        "Quel goût vous fait voyager ?",
+        "Croustillant, fondant, crémeux... ?",
+        "Un plat léger ou consistant ?",
+        "Décrivez votre plat idéal..."
+        ];
+
+        // Sélection de l'élément input
+        const inputSearch = document.getElementById('custom-placeholder');
+
+        // Fonction pour changer le placeholder
+        function changePlaceholder() {
+            const randomIndex = Math.floor(Math.random() * placeholders.length);
+            inputSearch.innerText = placeholders[randomIndex];
+        }
+
+        // Appeler la fonction toutes les 3 secondes
+        setInterval(changePlaceholder, 3000);
+
+        // Appel initial pour définir un placeholder au chargement de la page
+        changePlaceholder();
+        
     </script>
 </body>
 
